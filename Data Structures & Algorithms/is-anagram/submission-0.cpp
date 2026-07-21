@@ -1,25 +1,18 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        if(s.length() != t.length())
+        if(s.length() != t.length()) return false;
+        vector<int> hist(26,0) ;
+        for(int i = 0; i< s.length();i++)
         {
-            return false;
+            hist[s[i] - 'a']++;
+            hist[t[i] - 'a']--;
         }
-        vector <int> count (26,0);
-        for(int i ; i< s.length(); i++)
+        for(int i = 0 ; i < 26; i++)
         {
-            count[s[i] - 'a']++;
-            count [t[i]- 'a']--;
-        }
-        for(int num : count)
-        {
-            if(num != 0 )
-            {
-                return false;
-            }
+            if(hist[i] !=0) return false;
         }
         return true;
-
+        
     }
-
 };
