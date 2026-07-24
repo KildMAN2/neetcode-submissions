@@ -1,28 +1,27 @@
 class Solution {
 public:
     bool isValid(string s) {
-        stack <char>stack;
-        unordered_map<char, char> closeToOpen = 
-        {
-            {')' , '('}, { ']' , '['} , { '}' , '{'}
-        };
+        unordered_map<char,char> closeToOpen ={{')' , '('} ,{']' ,'['}  , {'}','{'}};
+        stack<char> st;
         for(char c : s)
         {
             if(closeToOpen.count(c))
             {
-                if(!stack.empty() && stack.top() == closeToOpen[c])
+                if(!st.empty() && closeToOpen[c] == st.top())
                 {
-                    stack.pop();
+                    st.pop();
                 }
                 else
                 {
                     return false;
                 }
-            } else
+            }
+            else
             {
-                stack.push(c);
+                st.push(c);
             }
         }
-        return stack.empty();
+        return st.empty();
+        
     }
 };
