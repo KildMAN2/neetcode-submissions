@@ -1,27 +1,26 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        unordered_map<string,vector<string>> res;
-        for(const auto &s : strs)
+        vector<vector<string>>res;
+        unordered_map<string, vector<string>> groups;
+        for(string s : strs)
         {
             vector<int> count (26,0);
-            for (char c : s)
+            for(char c : s)
             {
-                count[c-'a']++;
+                count[c - 'a']++;
             }
             string key = to_string(count[0]);
-            for(int i = 1; i<26;i++)
+            for(int i = 1 ; i < 26 ; i++)
             {
                 key += ',' + to_string(count[i]);
             }
-            res[key].push_back(s);
+            groups[key].push_back(s);
         }
-        vector<vector<string>> result;
-        for(const auto & pair : res)
+        for(auto & g : groups)
         {
-            result.push_back(pair.second);
+            res.push_back(g.second);
         }
-        return result;
+        return res;
     }
-
 };
